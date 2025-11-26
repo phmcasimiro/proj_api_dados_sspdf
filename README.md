@@ -136,4 +136,4 @@ git push -u origin main
 
 - Download dos dados em  [SSP-DF Ocorrências Policiais](https://www.ssp.df.gov.br/dados-por-regiao-administrativa/)
 - Limpeza e consolidação dos dados em arquivo .csv
-- Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigos
+- Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigose
