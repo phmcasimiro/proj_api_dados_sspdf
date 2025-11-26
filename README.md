@@ -28,8 +28,12 @@ source venv/bin/activate
 mkdir src
 mkdir src/api
 mkdir src/data
+mkdir src/data/etl
+mkdir src/data/etl/extractors
+mkdir src/data/etl/transformers
+mkdir src/data/etl/loaders
 mkdir src/models
-mkdir src/models
+mkdir src/schemas
 mkdir src/services
 mkdir tests
 mkdir logs
@@ -44,6 +48,10 @@ mkdir artifacts/models
 touch src/__init__.py
 touch src/api/__init__.py
 touch src/data/__init__.py
+touch src/data/etl/__init__.py
+touch src/data/etl/extractors/__init__.py
+touch src/data/etl/transformers/__init__.py
+touch src/data/etl/loaders/__init__.py
 touch src/models/__init__.py
 touch src/schemas/__init__.py
 touch src/services/__init__.py
