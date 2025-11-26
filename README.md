@@ -1,26 +1,28 @@
 # ROTEIRO PROJETO API OCORRÊNCIAS SSPDF
 
-### CRIAÇÃO DO DIRETÓRIO PAI DO PROJETO
+## 1 SETUP INICIAL DO PROJETO
+
+### 1.1 CRIAÇÃO DO DIRETÓRIO PAI DO PROJETO
 
 ```bash
 mkdir projeto-ml-api
 cd projeto-ml-api
 ```
 
-### INICIAR O GIT
+### 1.2 INICIAR O GIT
 
 ```bash
 git init
 ```
 
-### INSTALAR / ATIVAR VENV
+### 1.3 INSTALAR / ATIVAR VENV
 
 ```bash
 python3.12 -m venv venv
 
 source venv/bin/activate
 ```
-### 1.3 Criar estrutura de diretórios
+### 1.4 Criar estrutura de diretórios
 
 ```bash
 mkdir src
@@ -34,15 +36,9 @@ mkdir logs
 mkdir artifacts
 mkdir artifacts/models
 ```
-### 1.4 Criar arquivos `__init__.py`
+### 1.5 Criar arquivos `__init__.py`
 
 ```bash
-# Windows
-type nul > src/__init__.py
-type nul > src/api/__init__.py
-type nul > src/data/__init__.py
-type nul > src/models/__init__.py
-type nul > tests/__init__.py
 
 # Mac/Linux
 touch src/__init__.py
@@ -54,7 +50,7 @@ touch src/services/__init__.py
 touch tests/__init__.py
 ```
 
-### 1.5 Criar arquivos de configuração
+### 1.6 Criar arquivos de configuração
 
 **Criar `.gitignore`:**
 ```
@@ -82,12 +78,54 @@ ruff==0.1.15
 mypy==1.8.0
 httpx==0.26.0
 scikit-learn==1.4.0
+pandas==2.2.0
+seaborn==0.13.2
+matplotlib==3.7.2
 ```
 
-### 1.6 Instalar dependências
+### 1.7 Instalar dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
+
+## 2.0 Repositório Github 
+
+### 2.1 Criar o Repositório Vazio no GitHub
+
+Acesse o GitHub no navegador.
+
+Clique no botão "New" (Novo) para criar um novo repositório.
+
+Dê o nome proj_api_dados_sspdf (mesmo nome da sua pasta local).
+
+Defina-o como Public.
+
+Clique em "Create repository".
+
+
+# 2.2 Conectar repositório remoto
+
+ - O GitHub fornecerá a URL do repositório. Você usará essa URL para conectar sua pasta local.
+
+ - Copie a URL do repositório vazio (use a opção HTTPS).
+
+```bash
+git remote add origin https://github.com/phmcasimiro/proj_api_dados_sspdf.git
+``` 
+
+### 2.3 Inicializar o repositório local
+
+```bash
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+```
+
+## 3 Pipeline de Dados
+
+- Download dos dados em  [SSP-DF Ocorrências Policiais](https://www.ssp.df.gov.br/dados-por-regiao-administrativa/)
+- Limpeza e consolidação dos dados em arquivo .csv
+- Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigos
