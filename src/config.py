@@ -5,6 +5,51 @@
 
 import os
 from pathlib import Path
+import logging
+
+# --------------------------------------------------------------------------
+# Configurações Gerais da API
+# --------------------------------------------------------------------------
+
+# Configurações gerais da API
+API_VERSION = "1.0.0"
+API_TITLE = "API Ocorrências SSP-DF"
+API_DESCRIPTION = "API para servir dados de ocorrências policiais SSP-DF"
+
+# --------------------------------------------------------------------------
+# Configurações de Logging
+# --------------------------------------------------------------------------
+
+# Configurações de logging
+LOG_LEVEL = logging.INFO
+LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+LOG_DIR = Path("logs")
+
+# Criar diretório de logs se não existir
+LOG_DIR.mkdir(exist_ok=True)
+
+
+def setup_logging():
+    """
+    Configura sistema de logging da aplicação
+    """
+    logging.basicConfig(
+        level=LOG_LEVEL,
+        format=LOG_FORMAT,
+        handlers=[logging.FileHandler(LOG_DIR / "app.log"), logging.StreamHandler()],
+    )
+
+    return logging.getLogger("api_sspdf")
+
+
+# Logger Global para uso em outros módulos
+# Variável inicializada por demanda
+logger = logging.getLogger("api_sspdf")
+
+
+# --------------------------------------------------------------------------
+# Configurações da Raiz do Projeto
+# --------------------------------------------------------------------------
 
 # Define o caminho raiz do projeto para que todos os caminhos relativos funcionem
 # A função Path(__file__).resolve().parent sobe para 'proj_api_dados_sspdf/'

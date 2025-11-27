@@ -167,7 +167,11 @@ git commit -m "Initial commit"
 git push -u origin main
 ```
 
-## 3 Pipeline de Dados
+## 3 Logs
+
+
+
+## 4 Pipeline de Dados
 
 ![Pipeline ETL](image.png)
 
@@ -178,3 +182,7 @@ git push -u origin main
 **OBSERVAÇÃO:** O objetivo deste projeto não inclui extração dos dados por webscraping, por isso os dados foram baixados manualmente e disponibilizados no repositório;
 
 -3 Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigos;
+
+## 5 Services
+
+## 6 Main
