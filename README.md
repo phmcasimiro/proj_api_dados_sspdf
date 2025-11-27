@@ -40,6 +40,41 @@ mkdir logs
 mkdir artifacts
 mkdir artifacts/models
 ```
+```
+proj_api_dados_sspdf/
+├── artifacts/
+│   └── models/
+|        └── __init__.py
+├── logs/
+│   └── __init__.py
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── main.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── pipeline_etl.py
+│   │   ├── pipeline_etl.ipynb
+│   │   ├──ocorrencias_consolidado_2020_24.csv
+│   │   ├──ocorrencias_natureza.csv
+│   │   └──ocorrencias_ra.csv
+│   ├──models/
+│   |   └── __init__.py
+│   ├── schemas/
+│   |   ├── __init__.py
+│   │   └── schemas.py
+│   ├── services/
+│   |   ├── __init__.py
+│   │   └── services.py
+├── tests/
+│   └── __init__.py
+├── .gitignore
+├── requirements.txt
+└── README.md
+```
+
 ### 1.5 Criar arquivos `__init__.py`
 
 ```bash
@@ -134,6 +169,12 @@ git push -u origin main
 
 ## 3 Pipeline de Dados
 
-- Download dos dados em  [SSP-DF Ocorrências Policiais](https://www.ssp.df.gov.br/dados-por-regiao-administrativa/)
-- Limpeza e consolidação dos dados em arquivo .csv
-- Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigose
+![Pipeline ETL](image.png)
+
+-1 Download dos dados em  [SSP-DF Ocorrências Policiais](https://www.ssp.df.gov.br/dados-por-regiao-administrativa/)
+
+-2 Limpeza e consolidação dos dados em arquivo .csv;
+
+**OBSERVAÇÃO:** O objetivo deste projeto não inclui extração dos dados por webscraping, por isso os dados foram baixados manualmente e disponibilizados no repositório;
+
+-3 Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigos;

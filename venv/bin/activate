@@ -13,6 +13,11 @@ deactivate () {
         export PYTHONHOME
         unset _OLD_VIRTUAL_PYTHONHOME
     fi
+    if [ -n "${_OLD_VIRTUAL_PYTHONPATH:-}" ] ; then
+        PYTHONPATH="${_OLD_VIRTUAL_PYTHONPATH:-}"
+        export PYTHONPATH
+        unset _OLD_VIRTUAL_PYTHONPATH
+    fi
 
     # Call hash to forget past locations. Without forgetting
     # past locations the $PATH changes we made may not be respected.
@@ -65,6 +70,19 @@ if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     VIRTUAL_ENV_PROMPT='(venv) '
     export VIRTUAL_ENV_PROMPT
 fi
+
+# --- Configuração personalizada do PYTHONPATH para proj_api_dados_sspdf ---
+# O VIRTUAL_ENV aponta para .../proj_api_dados_sspdf/venv.
+# Para obter a raiz do projeto, subimos um nível (..)
+export PROJ_ROOT_PATH=$(dirname "$VIRTUAL_ENV")
+
+# Adiciona a raiz do projeto ao PYTHONPATH para resolver 'from src.config import...'
+export PYTHONPATH="$PROJ_ROOT_PATH:$PYTHONPATH"
+
+# Variável auxiliar para desativação: Armazena o valor antigo do PYTHONPATH
+_OLD_VIRTUAL_PYTHONPATH="$PYTHONPATH"
+export _OLD_VIRTUAL_PYTHONPATH
+# -------------------------------------------------------------------------
 
 # Call hash to forget past commands. Without forgetting
 # past commands the $PATH changes we made may not be respected
