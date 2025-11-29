@@ -7,59 +7,78 @@ import logging
 from src.config import PathConfig
 
 # Cria um logger com o nome do módulo ('src.services.services')
+# Este logger será configurado globalmente no main.py
 logger = logging.getLogger(__name__)
 
 
 # --------------------------------------------------------------------------
 # Classe de Serviço
 # --------------------------------------------------------------------------
-class OcorrenciasService:
-    """
-    Camada de Serviço responsável por carregar e fornecer consultas
-    ao DataFrame consolidado de ocorrências. O DF é carregado na memória
-    apenas uma vez para garantir a performance da API.
-    """
 
-    # Variável de classe que armazenará o DataFrame (carregamento único)
-    # Indica que a variável pertence à classe e não ao objeto
-    df: pd.DataFrame = None
+"""
+Camada de Serviço responsável por carregar e fornecer consultas
+ao DataFrame consolidado de ocorrências. O DF é carregado na memória
+apenas uma vez para garantir a performance da API.
+"""
+
+
+class OcorrenciasService:  # Indica que a classe pertence ao módulo 'src.services.services'
+
+    df: pd.DataFrame = (
+        None  # Variável de classe que armazenará o DataFrame (carregamento único)
+    )
 
     @classmethod  # Indica que o método é um método de classe
+
+    # Carregar DataFrame consolidado na memória, se ainda não estiver carregado.
     def load_data(cls):
-        """Carrega o DataFrame consolidado na memória, se ainda não estiver carregado."""
         if cls.df is None:
-            print(
-                f"[{__name__}] - Carregando DF consolidado de: {PathConfig.PATH_FINAL_DF.as_posix()}"
+
+            # Log de início do carregamento
+            logger.info(
+                f"Iniciando carregamento do DF consolidado de: {PathConfig.PATH_FINAL_DF.as_posix()}"
             )
+
+            # Tentativa de carregar o DataFrame
             try:
                 # O método lê o arquivo que foi salvo pelo pipeline_etl.py
                 cls.df = pd.read_csv(
                     PathConfig.PATH_FINAL_DF.as_posix(), sep=";", encoding="utf-8"
                 )
-                print(
-                    f"[{__name__}] - DF consolidado carregado com sucesso! Linhas: {len(cls.df)}"
+                # Log de sucesso do carregamento
+                logger.info(
+                    f"DF consolidado carregado com sucesso! Linhas: {len(cls.df)}"
                 )
+
+            # Tratamento de erro
             except FileNotFoundError:
+                # Registra o erro no log
+                logger.error(
+                    f"Arquivo de dados não encontrado em: {PathConfig.PATH_FINAL_DF.as_posix()}. "
+                    "Execute 'python -m src.data.pipeline_etl' primeiro.",
+                    exc_info=True,  # Adiciona o stack trace completo ao log do arquivo
+                )
+                # Lança o erro para que possa ser tratado pelo orchestrador (main.py)
                 raise FileNotFoundError(
                     f"Arquivo de dados não encontrado em: {PathConfig.PATH_FINAL_DF.as_posix()}. "
                     "Execute 'python -m src.data.pipeline_etl' primeiro."
                 )
 
-    @classmethod
+    @classmethod  # Indica que o método é um método de classe
+    # Indica que o método retorna uma lista de dicionários (formato JSON ideal para APIs).
     def get_all_data(
         cls,
-    ) -> list[dict]:  # Indica que o método retorna uma lista de dicionários
-        """
-        Retorna todos os registros do DataFrame como uma lista de dicionários
-        (formato JSON ideal para APIs).
-        """
-        # Garante que os dados estão carregados na memória
+    ) -> list[dict]:
+
+        # Garantir que os dados estão carregados na memória
         if cls.df is None:
             cls.load_data()
 
-        # Retorna o DF em memória convertido para uma lista de dicionários
+        # Retornar DF em memória convertido para uma lista de dicionários
         return cls.df.to_dict(orient="records")
 
+
+'''
     # Exemplo futuro: método para filtrar os dados
     @classmethod
     def filter_by_ra(cls, regiao_administrativa: str) -> list[dict]:
@@ -73,3 +92,4 @@ class OcorrenciasService:
         )
 
         return cls.df[mask].to_dict(orient="records")
+'''
