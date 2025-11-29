@@ -20,25 +20,27 @@ API_DESCRIPTION = "API para servir dados de ocorrências policiais SSP-DF"
 # Configurações de Logging
 # --------------------------------------------------------------------------
 
-# Configurações de logging
+# Níveis logging (INFO, DEBUG, WARNING, ERROR, CRITICAL)
 LOG_LEVEL = logging.INFO
+# Formato do log
 LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+# Diretório de logs
 LOG_DIR = Path("logs")
-
 # Criar diretório de logs se não existir
 LOG_DIR.mkdir(exist_ok=True)
 
 
+# Configurar sistema de logging da aplicação
 def setup_logging():
-    """
-    Configura sistema de logging da aplicação
-    """
     logging.basicConfig(
+        # Nível de logging
         level=LOG_LEVEL,
+        # Formato do log
         format=LOG_FORMAT,
+        # Handlers
         handlers=[logging.FileHandler(LOG_DIR / "app.log"), logging.StreamHandler()],
     )
-
+    # Logger Global para uso em outros módulos
     return logging.getLogger("api_sspdf")
 
 

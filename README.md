@@ -173,16 +173,25 @@ git push -u origin main
 
 ## 4 Pipeline de Dados
 
-![Pipeline ETL](image.png)
+![Pipeline ETL](img/etl.png)
 
--1 Download dos dados em  [SSP-DF Ocorrências Policiais](https://www.ssp.df.gov.br/dados-por-regiao-administrativa/)
+**OBSERVAÇÃO:** O objetivo do diretório src/data é armazenar os arquivos de dados brutos e os arquivos de dados processados, além do arquivo de configuração do pipeline ETL _pipeline_etl.py_. Neste diretório é armazenada a lógica de extração, transformação e carregamento dos dados. Importante destacar que o webscraping não foi realizado, por isso os arquivos .csv foram baixados manualmente e disponibilizados no repositório;
 
--2 Limpeza e consolidação dos dados em arquivo .csv;
+**Repositório de Dados Raw:** _src/data/;_
 
-**OBSERVAÇÃO:** O objetivo deste projeto não inclui extração dos dados por webscraping, por isso os dados foram baixados manualmente e disponibilizados no repositório;
+**Arquivos Raw:** _ocorrencias_ra.csv; ocorrencias_natureza.csv; ocorrencias_consolidado_2020_24.csv_
 
--3 Normalização com tabela de Regiões Administrativas e seus respectivos Códigos e tabela de Natureza das Ocorrências e seus respectivos Códigos;
+**Fonte de Dados:** [SSP-DF Ocorrências Policiais](https://www.ssp.df.gov.br/dados-por-regiao-administrativa/);
+
 
 ## 5 Services
 
+![Services](img/services.jpg)
+
+**OBSERVAÇÃO:** O Objetivo do diretório _src/services_ é armazenar a lógica de negócio da API, ou seja, armazenar os scripts que serão usados para carregar o dataframe principal em mémória por meio do ***método load_data()*** da ***Classe OcorrenciasService*** e também disponibilizar os dados em formato JSON para as rotas da API por intermédio do ***método get_all_data()*** da ***Classe OcorrenciasService***.
+
+
 ## 6 Main
+
+
+## 7 Schemas
